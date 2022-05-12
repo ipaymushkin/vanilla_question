@@ -4,6 +4,15 @@ window.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         const values = getValues(form);
         const users = Users.getUsers();
-        console.log(users, values);
+        if (users[values.login]) {
+            showAlert("Пользователь с тами логином уже существует!")
+        } else {
+            Users.setUser(values);
+            showAlert("Вы будете перенаправлены на страницу авторизации!");
+            showAlert("Вы успешно зарегистированы!");
+            setTimeout(() => {
+                window.location = "/";
+            }, 5000)
+        }
     });
 });
