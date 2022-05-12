@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
         tbody.appendChild(createElementFromString(tr));
         const gameTr = document.getElementById("game-" + game.id);
         gameTr.addEventListener("click", () => {
-            console.log(game.id);
+            location.href = "/game?gameId=" + game.id;
         })
     })
 });
