@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
         if (!users[values.login] || users[values.login].password !== values.password) {
             showAlert("Пользователя с такими данными не существует!")
         } else {
-            console.log('переход в нужное место')
+            location.href = "/games.html";
         }
     });
 });
