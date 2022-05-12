@@ -16,6 +16,12 @@ class Users {
         };
         localStorage.setItem("users", JSON.stringify(users));
     }
+
+    static deleteUser = (login) => {
+        const users = this.getUsers();
+        delete users[login];
+        localStorage.setItem("users", JSON.stringify(users));
+    }
 }
 
 class Games {
@@ -30,5 +36,12 @@ class Games {
     static setGame = (params) => {
         const games = this.getGames();
         games.push(params);
+        localStorage.setItem("games", JSON.stringify(games));
+    }
+
+    static deleteGame = (gameId) => {
+        const games = this.getGames();
+        const filteredGames = games.filter(el => el.id !== gameId);
+        localStorage.setItem("games", JSON.stringify(filteredGames));
     }
 }

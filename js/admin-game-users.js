@@ -7,7 +7,13 @@ window.addEventListener('DOMContentLoaded', () => {
         tr += "<td>" + userLogin + "</td>";
         tr += "<td>" + users[userLogin].lastName + "</td>";
         tr += "<td>" + users[userLogin].firstName + "</td>";
+        tr += '<td><button type="button" class="btn btn-primary" id="remove-user-' + userLogin + '">Удалить</button></td>';
         tr += "</tr>";
         tbody.appendChild(createElementFromString(tr));
+        const removeGameButton = document.getElementById("remove-user-" + userLogin);
+        removeGameButton.addEventListener("click", () => {
+            Users.deleteUser(userLogin);
+            location.reload();
+        })
     })
 });
