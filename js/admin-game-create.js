@@ -46,10 +46,23 @@ window.addEventListener('DOMContentLoaded', () => {
                     let answers = '<label class="answers-container">Ответы<div class="card"><div class="card-body" id="answers-' + id + '">';
                     answers += '<input name="question.answer.' + id + '.' + makeId() + '" class="form-control" placeholder="Ответ" required>'
                     answers += '<input name="question.answer.' + id + '.' + makeId() + '" class="form-control" placeholder="Ответ" required>'
-                    answers += '</div><button type="button" class="btn btn-default" id="add-question">Добавить ответ</button></div></label>';
+                    answers += '</div><button type="button" class="btn btn-default" id="add-answer-' + id + '">Добавить ответ</button></div></label>';
                     container.appendChild(createElementFromString(answers));
                     const answersContainer = document.getElementById("answers-" + id);
-                    console.log(answersContainer)
+                    const addAnswerButton = document.getElementById("add-answer-" + id);
+                    addAnswerButton.addEventListener("click", () => {
+                        const answerId = makeId();
+                        let newAnswer = "<div class='answer-row' id='answer-" + answerId + "'>";
+                        newAnswer += '<input name="question.answer.' + id + '.' + answerId + '" class="form-control" placeholder="Ответ" required>'
+                        newAnswer += '<button type="button" class="btn btn-default remove-button" id="remove-answer-' + answerId + '">Удалить ответ</button>'
+                        newAnswer += "</div>";
+                        answersContainer.appendChild(createElementFromString(newAnswer));
+                        const answerRemoveButton = document.getElementById("remove-answer-" + answerId);
+                        const answerContainer = document.getElementById("answer-" + answerId)
+                        answerRemoveButton.addEventListener("click", () => {
+                            answerContainer.remove();
+                        })
+                    })
                 }
             })
         })

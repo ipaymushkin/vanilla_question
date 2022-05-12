@@ -111,3 +111,11 @@ body {
 .answers-container {
     width: 100%;
 }
+
+.answer-row {
+    display: flex;
+}
+
+.answer-row .remove-button {
+    height: 38px;
+}
