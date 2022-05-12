@@ -26,4 +26,9 @@ class Games {
             return []
         }
     }
+
+    static setGame = (params) => {
+        const games = this.getGames();
+        games.push(params);
+    }
 }
