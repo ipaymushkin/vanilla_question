@@ -17,6 +17,6 @@ window.addEventListener('DOMContentLoaded', () => {
     form.appendChild(createElementFromString(lastName));
     const firstName = '<input id="firstName" name="firstName" class="form-control element-wrapper" placeholder="Имя" required value="' + user.firstName + '">';
     form.appendChild(createElementFromString(firstName));
-    const button = '<button class="btn btn-lg btn-primary btn-block" type="submit">Сохранить</button>';
+    const button = '<button class="btn btn-lg btn-primary btnblock" type="submit">Сохранить</button>';
     form.appendChild(createElementFromString(button));
 });

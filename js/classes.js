@@ -74,3 +74,17 @@ class CurrentUser {
         localStorage.removeItem("login");
     }
 }
+
+class Statistics {
+    static getStatistics = () => {
+        try {
+            return JSON.parse(localStorage.getItem("statistics")) || {};
+        } catch (e) {
+            return {};
+        }
+    }
+
+    static setStatistics = () => {
+
+    }
+}
