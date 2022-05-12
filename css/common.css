@@ -1,3 +1,11 @@
 .background-gradient {
     background: linear-gradient(to right, #D7DDE8, #757F9A);
 }
+
+.table-row-clickable {
+    cursor: pointer;
+}
+
+.header-style {
+    margin-bottom: 40px;
+}
