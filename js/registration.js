@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
             showAlert("Вы успешно зарегистированы!");
             setTimeout(() => {
                 window.location = "/";
-            }, 5000)
+            }, 3500)
         }
     });
 });
