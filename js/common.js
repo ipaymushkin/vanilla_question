@@ -19,3 +19,10 @@ const makeId = () => {
     }
     return result;
 }
+
+function createElementFromString(html) {
+    const template = document.createElement('template');
+    html = html.trim();
+    template.innerHTML = html;
+    return template.content.firstChild;
+}
