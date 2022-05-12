@@ -3,11 +3,11 @@ window.addEventListener('DOMContentLoaded', () => {
     form.addEventListener("submit", (event) => {
         event.preventDefault();
         const values = getValues(form);
-        console.log(values);
-        if (values.login !== 'admin' || values.password !== 'admin') {
-            showAlert("Неверная связка логин/пароль для выхода в административную панель!")
+        const users = Users.getUsers();
+        if (!users[values.login] || users[values.login].password !== values.password) {
+            showAlert("Пользователя с такими данными не существует!")
         } else {
-            location.href = '/admin-game-list.html'
+            console.log('переход в нужное место')
         }
     });
 });
