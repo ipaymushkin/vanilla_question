@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Вход</title>
+    <title>Создание игры</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
@@ -75,7 +75,7 @@
                 <input id="name" name="name" class="form-control" placeholder="Название игры" required autofocus>
                 <label for="description" class="sr-only">Описание игры</label>
                 <textarea class="form-control" name="description" id="description" rows="3" placeholder="Описание игры"></textarea>
-                <div class="btn-group btn-group-toggle radio-wrapper" data-toggle="buttons">
+                <div class="btn-group btn-group-toggle element-wrapper" data-toggle="buttons">
                     <label class="btn btn-secondary active">
                         <input type="radio" name="complexity" id="option1" autocomplete="off" value="Просто"
                                checked> Просто
@@ -89,6 +89,12 @@
                         Сложно
                     </label>
                 </div>
+                <div class="element-wrapper" id="questions">
+
+                </div>
+                <button type="button" class="btn btn-default element-wrapper" id="add-question">
+                    Добавить вопрос
+                </button>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Сохранить</button>
             </form>
         </main>
