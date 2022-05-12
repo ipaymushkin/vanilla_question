@@ -17,3 +17,13 @@ class Users {
         localStorage.setItem("users", JSON.stringify(users));
     }
 }
+
+class Games {
+    static getGames = () => {
+        try {
+            return JSON.parse(localStorage.getItem("games")) || [];
+        } catch (e) {
+            return []
+        }
+    }
+}
