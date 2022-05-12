@@ -17,6 +17,15 @@ class Users {
         localStorage.setItem("users", JSON.stringify(users));
     }
 
+    static updateUser = (login, params) => {
+        const users = this.getUsers();
+        users[login] = {
+            ...users[login],
+            ...params,
+        }
+        localStorage.setItem("users", JSON.stringify(users));
+    }
+
     static deleteUser = (login) => {
         const users = this.getUsers();
         delete users[login];
@@ -43,5 +52,25 @@ class Games {
         const games = this.getGames();
         const filteredGames = games.filter(el => el.id !== gameId);
         localStorage.setItem("games", JSON.stringify(filteredGames));
+    }
+}
+
+class CurrentUser {
+    static getUserLogin = () => {
+        return localStorage.getItem("login");
+    }
+
+    static getCurrentUser = () => {
+        const login = this.getUserLogin();
+        const users = Users.getUsers();
+        return users[login];
+    }
+
+    static setCurrentUser = (login) => {
+        localStorage.setItem("login", login);
+    }
+
+    static clearCurrentUser = () => {
+        localStorage.removeItem("login");
     }
 }
