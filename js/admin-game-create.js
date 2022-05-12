@@ -56,7 +56,6 @@ window.addEventListener('DOMContentLoaded', () => {
         card += '<div class="form-group"><label>Тип вопроса<select class="form-control" name="question.type.' + id + '">'
         card += '<option value="YESNO" selected>Да/Нет</option>'
         card += '<option value="SINGLE">Один из списка</option>'
-        card += '<option value="MULTIPLE">Несколько из списка</option>'
         card += '<option value="COMMENT">Комментарий</option>'
         card += '</select></label></div>';
         card += '<div class="element-wrapper" id="container-' + id + '"></div>'
@@ -76,7 +75,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById('container-' + id);
         select.addEventListener("change", (event) => {
             container.innerHTML = "";
-            if (event.target.value === "SINGLE" || event.target.value === "MULTIPLE") {
+            if (event.target.value === "SINGLE") {
                 let answers = '<label class="answers-container">Ответы<div class="card"><div class="card-body" id="answers-' + id + '">';
                 answers += '<input name="question.answer.' + id + '.' + makeId() + '" class="form-control" placeholder="Ответ" required>'
                 answers += '<input name="question.answer.' + id + '.' + makeId() + '" class="form-control" placeholder="Ответ" required>'
