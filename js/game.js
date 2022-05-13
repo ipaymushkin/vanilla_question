@@ -4,7 +4,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const games = Games.getGames();
     const gameDetails = games.find(el => el.id === gameId);
     if (gameDetails) {
-        console.log('gameDetails', gameDetails);
         const title = document.getElementById("title");
         title.innerText = gameDetails.name;
         const description = document.getElementById("description");
@@ -52,6 +51,7 @@ window.addEventListener('DOMContentLoaded', () => {
     form.addEventListener("submit", (event) => {
         event.preventDefault();
         const values = getValues(form);
-        console.log(values, gameId);
+        Statistics.setStatistics(gameId, values);
+        location.href = "/games.html";
     })
 });

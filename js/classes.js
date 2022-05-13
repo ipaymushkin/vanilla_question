@@ -84,7 +84,16 @@ class Statistics {
         }
     }
 
-    static setStatistics = () => {
-
+    static setStatistics = (gameId, meta) => {
+        const statistics = this.getStatistics();
+        if (!statistics[gameId]) {
+            statistics[gameId] = {};
+        }
+        const login = CurrentUser.getUserLogin();
+        statistics[gameId] = {
+            ...statistics[gameId],
+            [login]: meta,
+        }
+        localStorage.setItem("statistics", JSON.stringify(statistics));
     }
 }
