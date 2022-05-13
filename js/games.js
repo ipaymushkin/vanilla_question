@@ -22,7 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const gameTr = document.getElementById("game-" + game.id);
         gameTr.addEventListener("click", () => {
             if (!isComplete) {
-                location.href = "/game?gameId=" + game.id;
+                location.href = "/game.html?gameId=" + game.id;
             } else {
                 showAlert("Вы уже ответили на вопросы этой игры!")
             }

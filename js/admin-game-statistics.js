@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
             tbody.appendChild(createElementFromString(tr));
             const gameTr = document.getElementById("game-" + game.id);
             gameTr.addEventListener("click", () => {
-                location.href = "/admin-game-charts?gameId=" + game.id;
+                location.href = "/admin-game-charts.html?gameId=" + game.id;
             })
         }
 
