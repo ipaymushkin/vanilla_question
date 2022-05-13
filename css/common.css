@@ -17,3 +17,8 @@
 .table-row-complete {
     background-color: lightgreen !important;
 }
+
+.chart-wrapper {
+    width: 100%;
+    height: 500px;
+}
