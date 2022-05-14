@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
         let card = '<div class="card"><div class="card-body">';
         card += '<h5 class="header-style">Вопрос №' + (index + 1) + '. ' + question.name + '</h5>';
         if (question.type === "SINGLE" || question.type === "YESNO") {
-            card += '<div id="' + key + '" class="chart-wrapper"></div>'
+            card += '<div id="' + key + '" class="chart-wrapper' + (window.innerWidth < 768 ? ' chart-wrapper-mobile' : '') + '"></div>'
         } else if (question.type === 'COMMENT') {
             card += '<div id="' + key + '"></div>'
         }

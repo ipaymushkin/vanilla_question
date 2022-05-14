@@ -5,7 +5,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const login = CurrentUser.getUserLogin();
     games.forEach((game, index) => {
         const isComplete = statistics[game.id] && statistics[game.id][login];
-        console.log(isComplete);
         let tr = "<tr class='table-row-clickable";
         if (isComplete) {
             tr += " table-row-complete";
