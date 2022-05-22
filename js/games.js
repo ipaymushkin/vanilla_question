@@ -4,7 +4,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const statistics = Statistics.getStatistics();
     const login = CurrentUser.getUserLogin();
     games.forEach((game, index) => {
-        const isComplete = statistics[game.id] && statistics[game.id][login];
+        const values = statistics[game.id] && statistics[game.id][login];
+        const isComplete = !!values;
         let tr = "<tr class='table-row-clickable";
         if (isComplete) {
             tr += " table-row-complete";
@@ -15,12 +16,20 @@ window.addEventListener('DOMContentLoaded', () => {
         tr += "<td>" + game.name + "</td>";
         tr += "<td>" + (game.description || "").replace(/\n/g, "<br/>") + "</td>";
         tr += "<td>" + game.complexity + "</td>";
+        tr += "<td>";
+        if (isComplete) {
+            tr += getRightAnswersCount(values, game);
+        } else {
+            tr += "Нет данных";
+        }
+        tr += "</td>";
         tr += "<td>" + Object.keys(game.questions).length + "</td>";
         tr += "</tr>";
         tbody.appendChild(createElementFromString(tr));
         const gameTr = document.getElementById("game-" + game.id);
         gameTr.addEventListener("click", () => {
             if (!isComplete) {
+                // location.href = "/game?gameId=" + game.id;
                 location.href = "/game.html?gameId=" + game.id;
             } else {
                 showAlert("Вы уже ответили на вопросы этой игры!")

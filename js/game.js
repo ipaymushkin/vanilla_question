@@ -51,7 +51,12 @@ window.addEventListener('DOMContentLoaded', () => {
     form.addEventListener("submit", (event) => {
         event.preventDefault();
         const values = getValues(form);
+        const rightAnswers = getRightAnswersCount(values, gameDetails);
+        showAlert("Количество правильных ответов: " + rightAnswers + " из " + Object.keys(values).length);
+        showAlert("Вы будете перенаправлены на страницу 'Список игр'");
         Statistics.setStatistics(gameId, values);
-        location.href = "/games.html";
+        setTimeout(() => {
+            location.href = "/games.html";
+        }, 3000);
     })
 });

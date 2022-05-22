@@ -35,3 +35,12 @@ function getParameterByName(name, url = window.location.href) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
+
+function getRightAnswersCount(values, gameDetails) {
+    let rightAnswers = 0;
+    Object.keys(values).forEach(questionId => {
+        const answer = values[questionId];
+        if (gameDetails.questions[questionId].response === answer) rightAnswers += 1;
+    })
+    return rightAnswers;
+}
