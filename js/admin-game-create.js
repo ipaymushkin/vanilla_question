@@ -44,6 +44,15 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             }
         })
+        Object.keys(questions).forEach(questionKey => {
+            if (questionKey !== 'answers') {
+                questions[questionKey] = {
+                    ...questions[questionKey],
+                    response: questions.answers[questionKey],
+                }
+            }
+        })
+        delete questions.answers;
         meta.questions = questions;
         Games.setGame(meta);
         location.href = "/admin-game-list.html";
