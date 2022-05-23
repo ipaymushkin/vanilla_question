@@ -46,7 +46,7 @@ function getRightAnswersCount(values, gameDetails) {
 }
 
 function requestGet(url) {
-    return fetch("https://vanilla-question-backend.vercel.app/" + url, {method: "GET"});
+    return fetch("https://vanilla-question-backend.vercel.app" + url, {method: "GET"});
 }
 
 function requestPost(url, body = {}) {
