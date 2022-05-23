@@ -54,8 +54,11 @@ window.addEventListener('DOMContentLoaded', () => {
         })
         delete questions.answers;
         meta.questions = questions;
-        Games.setGame(meta);
-        location.href = "/admin-game-list.html";
+        requestPost("/game/save", meta).then(r => r.json()).then(response => {
+            if (response.ok) {
+                location.href = "/admin-game-list.html";
+            }
+        })
     });
 
     const addYesNoBlock = (id) => {
