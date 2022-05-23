@@ -50,7 +50,7 @@ function requestGet(url) {
 }
 
 function requestPost(url, body = {}) {
-    return fetch("http://localhost:5050" + url, {
+    return fetch("https://vanilla-question-backend.vercel.app" + url, {
         method: "POST",
         body: JSON.stringify(body),
         headers: {
