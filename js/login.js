@@ -3,12 +3,13 @@ window.addEventListener('DOMContentLoaded', () => {
     form.addEventListener("submit", (event) => {
         event.preventDefault();
         const values = getValues(form);
-        const users = Users.getUsers();
-        if (!users[values.login] || users[values.login].password !== values.password) {
-            showAlert("Пользователя с такими данными не существует!")
-        } else {
-            CurrentUser.setCurrentUser(values.login);
-            location.href = "/games.html";
-        }
+        requestPost("/auth", values).then(response => response.json()).then(response => {
+            if (response.ok) {
+                CurrentUser.setCurrentUser(values.login);
+                location.href = "/games.html";
+            } else {
+                showAlert(response.message);
+            }
+        })
     });
 });

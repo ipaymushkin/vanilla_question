@@ -44,3 +44,17 @@ function getRightAnswersCount(values, gameDetails) {
     })
     return rightAnswers;
 }
+
+function requestGet(url) {
+    return fetch("http://localhost:5050" + url, {method: "GET"});
+}
+
+function requestPost(url, body = {}) {
+    return fetch("http://localhost:5050" + url, {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+}
