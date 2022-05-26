@@ -46,11 +46,11 @@ function getRightAnswersCount(values, gameDetails) {
 }
 
 function requestGet(url) {
-    return fetch("https://vanilla-question-backend.vercel.app" + url, {method: "GET"});
+    return fetch("https://dev99.it-aces.com" + url, {method: "GET"});
 }
 
 function requestPost(url, body = {}) {
-    return fetch("https://vanilla-question-backend.vercel.app" + url, {
+    return fetch("https://dev99.it-aces.com" + url, {
         method: "POST",
         body: JSON.stringify(body),
         headers: {
