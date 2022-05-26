@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
             tr += "<td>" + (game.description || "").replace(/\n/g,"<br/>") + "</td>";
             tr += "<td>" + game.complexity + "</td>";
             tr += "<td>" + Object.keys(game.questions).length + "</td>";
-            // tr += '<td><button type="button" class="btn btn-primary" id="remove-game-' + game.id + '">Удалить</button></td>';
+            tr += '<td><button type="button" class="btn btn-primary" id="remove-game-' + game.id + '">Удалить</button></td>';
             tr += "</tr>";
             tbody.appendChild(createElementFromString(tr));
             const removeGameButton = document.getElementById("remove-game-" + game.id);
