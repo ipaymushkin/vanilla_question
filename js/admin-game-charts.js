@@ -85,7 +85,11 @@ window.addEventListener('DOMContentLoaded', () => {
                     const userStat = stat[login];
                     let userCard = '<div class="card"><div class="card-body">';
                     userCard += '<h5 class="header-style">Пользователь: ';
-                    userCard += users[login].lastName + " " + users[login].firstName + " (" + login + ")";
+                    if (users[login]) {
+                        userCard += users[login].lastName + " " + users[login].firstName + " (" + login + ")";
+                    } else {
+                        userCard += "Аноним";
+                    }
                     userCard += '<h5>';
                     Object.keys(userStat).forEach((key, index) => {
                         const question = game.questions[key];
@@ -103,7 +107,6 @@ window.addEventListener('DOMContentLoaded', () => {
                         userCard += '</h6>';
                         userCard += '</div></div>';
                     })
-                    // userCard +=
                     userCard += '</div></div>';
                     cardsUsers.appendChild(createElementFromString(userCard));
                 })
