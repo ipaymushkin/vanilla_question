@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     const tbody = document.getElementById("tbody_content");
     requestGet("/games").then(r => r.json()).then(response => {
-        Object.values(response).forEach((game, index) => {
+        response.forEach((game, index) => {
             let tr = "<tr>";
             tr += "<td>" + (index + 1) + "</td>";
             tr += "<td>" + game.name + "</td>";

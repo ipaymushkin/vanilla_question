@@ -1,14 +1,21 @@
 window.addEventListener('DOMContentLoaded', () => {
     const cardsWrapper = document.getElementById('cards-wrapper');
     const gameId = getParameterByName("gameId");
-    console.log(gameId);
     requestPost('/statistic/get', {id: gameId}).then(r => r.json()).then(stat => {
         requestPost('/game/get', {id: gameId}).then(r => r.json()).then(game => {
             requestGet('/users').then(r => r.json()).then(users => {
                 Object.keys(game.questions).forEach((key, index) => {
                     const question = game.questions[key];
                     let card = '<div class="card"><div class="card-body">';
-                    card += '<h5 class="header-style">Вопрос №' + (index + 1) + '. ' + question.name + '</h5>';
+                    card += '<h5 class="header-style">Вопрос №' + (index + 1) + '. ' + question.name + " (Правильный ответ: ";
+                    if (question.type === "YESNO") {
+                        card += question.response === 'yes' ? "Да" : "Нет";
+                    } else if (question.type === "COMMENT") {
+                        card += question.response;
+                    } else if (question.type === "SINGLE") {
+                        card += question.answers[question.response];
+                    }
+                    card += ')</h5>';
                     if (question.type === "SINGLE" || question.type === "YESNO") {
                         card += '<div id="' + key + '" class="chart-wrapper' + (window.innerWidth < 768 ? ' chart-wrapper-mobile' : '') + '"></div>'
                     } else if (question.type === 'COMMENT') {
@@ -19,7 +26,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     if (question.type === "SINGLE" || question.type === "YESNO") {
                         const keys = [];
                         Object.values(stat).forEach(element => {
-                            keys.push(element[key]);
+                            keys.push(element.meta[key]);
                         })
                         const counts = {};
                         keys.forEach(function (x) {
@@ -72,7 +79,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         const wrapper = document.getElementById(key);
                         const comments = [];
                         Object.values(stat).forEach(element => {
-                            comments.push(element[key]);
+                            comments.push(element.meta[key]);
                         })
                         comments.forEach(comment => {
                             const row = '<div class="card"><div class="card-body">' + comment + '</div></div>';
@@ -81,19 +88,19 @@ window.addEventListener('DOMContentLoaded', () => {
                     }
                 })
                 const cardsUsers = document.getElementById("cards-users");
-                Object.keys(stat).forEach(login => {
-                    const userStat = stat[login];
+                stat.forEach(userStat => {
+                    const user = users.find(el => el.login === userStat.login);
                     let userCard = '<div class="card"><div class="card-body">';
                     userCard += '<h5 class="header-style">Пользователь: ';
-                    if (users[login]) {
-                        userCard += users[login].lastName + " " + users[login].firstName + " (" + login + ")";
+                    if (user) {
+                        userCard += user.lastName + " " + user.firstName + " (" + user.login + ")";
                     } else {
                         userCard += "Аноним";
                     }
                     userCard += '<h5>';
-                    Object.keys(userStat).forEach((key, index) => {
+                    Object.keys(userStat.meta).forEach((key, index) => {
                         const question = game.questions[key];
-                        const userMeta = userStat[key];
+                        const userMeta = userStat.meta[key];
                         userCard += '<div class="card"><div class="card-body">';
                         userCard += '<h6>Вопрос №' + (index + 1) + '. ' + question.name + '</h6>';
                         userCard += '<h6>Ответ: ';

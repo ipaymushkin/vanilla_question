@@ -1,10 +1,10 @@
 window.addEventListener('DOMContentLoaded', () => {
     const tbody = document.getElementById("tbody_content");
     const login = CurrentUser.getUserLogin();
-    requestGet('/statistics').then(res => res.json()).then(statistics => {
+    requestPost('/user-statistics', {login}).then(res => res.json()).then(statistics => {
         requestGet('/games').then(r => r.json()).then(response => {
             Object.values(response).forEach((game, index) => {
-                const values = statistics[game.id] && statistics[game.id][login];
+                const values = statistics.find(el => game.id === el.gameId);
                 const isComplete = !!values;
                 let tr = "<tr class='table-row-clickable";
                 if (isComplete) {
@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 tr += "<td>" + game.complexity + "</td>";
                 tr += "<td>";
                 if (isComplete) {
-                    tr += getRightAnswersCount(values, game);
+                    tr += getRightAnswersCount(values.meta, game);
                 } else {
                     tr += "Нет данных";
                 }
@@ -29,7 +29,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 const gameTr = document.getElementById("game-" + game.id);
                 gameTr.addEventListener("click", () => {
                     if (!isComplete) {
-                        // location.href = "/game?gameId=" + game.id;
                         location.href = "/game.html?gameId=" + game.id;
                     } else {
                         showAlert("Вы уже ответили на вопросы этой игры!")
