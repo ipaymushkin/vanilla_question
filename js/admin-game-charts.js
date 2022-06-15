@@ -1,9 +1,88 @@
 window.addEventListener('DOMContentLoaded', () => {
     const cardsWrapper = document.getElementById('cards-wrapper');
+    const commonWrapper = document.getElementById("common-wrapper");
     const gameId = getParameterByName("gameId");
     requestPost('/statistic/get', {id: gameId}).then(r => r.json()).then(stat => {
         requestPost('/game/get', {id: gameId}).then(r => r.json()).then(game => {
             requestGet('/users').then(r => r.json()).then(users => {
+                console.log(stat);
+                const count = stat.length;
+                const common = {};
+                Object.keys(game.questions).forEach((key, index) => {
+                    const question = game.questions[key];
+                    if (!common[index]) {
+                        common[index] = 0;
+                    }
+                    stat.forEach(el => {
+                        if (question.response === el.meta[key]) {
+                            common[index] = common[index] + 1;
+                        }
+                    })
+                })
+                let commonCard = '<div class="card"><div class="card-body">';
+                commonCard += '<div id="common-chart" class="chart-wrapper' + (window.innerWidth < 768 ? ' chart-wrapper-mobile' : '') + '"></div>';
+                commonCard += '</div></div>';
+                commonWrapper.appendChild(createElementFromString(commonCard));
+                Highcharts.chart('common-chart', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    xAxis: {
+                        categories: Object.keys(common).map((_, idx) => (idx + 1) + " Вопрос")
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: ''
+                        },
+                        stackLabels: {
+                            enabled: true,
+                            style: {
+                                fontWeight: 'bold',
+                                color: ( // theme
+                                    Highcharts.defaultOptions.title.style &&
+                                    Highcharts.defaultOptions.title.style.color
+                                ) || 'gray'
+                            }
+                        }
+                    },
+                    legend: {
+                        align: 'right',
+                        x: -30,
+                        verticalAlign: 'top',
+                        y: 25,
+                        floating: true,
+                        backgroundColor:
+                            Highcharts.defaultOptions.legend.backgroundColor || 'white',
+                        borderColor: '#CCC',
+                        borderWidth: 1,
+                        shadow: false
+                    },
+                    tooltip: {
+                        headerFormat: '<b>{point.x}</b><br/>',
+                        pointFormat: '{series.name}: {point.y}<br/>Всего: {point.stackTotal}'
+                    },
+                    plotOptions: {
+                        column: {
+                            stacking: 'normal',
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Неверные ответы',
+                        data: Object.values(common).map(el => count - el),
+                        color: "red"
+                    }, {
+                        name: 'Верные ответы',
+                        data: Object.values(common),
+                        color: "green"
+                    }, ]
+                });
                 Object.keys(game.questions).forEach((key, index) => {
                     const question = game.questions[key];
                     let card = '<div class="card"><div class="card-body">';
